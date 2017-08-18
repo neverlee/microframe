@@ -1,0 +1,42 @@
+plugin_path: ./plugins
+plugins:
+  server:
+    server: rpc # Server for go-micro; rpc
+    name: micro.frame.srv.example
+    version: v0.0.1dev
+    metadata:
+    id: # Auto-generated if not specified
+    address: # Bind address for the server. 127.0.0.1:8080
+    advertise: # instead server_address when register with discovery
+    register_interval: 40s
+    register_ttl: 80s
+
+  client:
+    client: rpc # Client for go-micro; rpc
+    request_timeout: 5s # e.g 500ms, 5s, 1m. Default: 5s
+    retries: 1 # Default: 1
+    pool_size: 2 # Default: 0
+    pool_ttl: 1m # e.g 500ms, 5s, 1m. Default: 1m
+
+  broker:
+    broker: # Broker for pub/sub. http, nats, rabbitmq
+    address: # Comma-separated list of broker addresses
+
+  registry:
+    registry: consul # Registry for discovery. consul, mdns
+    address: # Comma-separated list
+      - 127.0.0.1:8500
+
+  selector:
+    selector: # Selector used to pick nodes for querying
+
+  transport:
+    transport: # Transport mechanism used; http
+    transport_address: # Comma-separated list of transport addresses
+
+  logger:
+    handle: true
+
+# add your plugin configure here
+#  greeter:
+#    salutation: 你好
