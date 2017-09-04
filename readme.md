@@ -10,7 +10,9 @@ MicroFrame是基于[go-micro](https://github.com/micro/go-micro)结合go的plugi
 5. 所有节点可以通过配置，直接使用以上这些公共服务
 
 ## 微服务架构设计
-[MicroFrame](http://github.com/neverlee/microframe/raw/master/docs/MicroFrame.png)
+![MicroFrame](https://github.com/neverlee/microframe/raw/master/docs/MicroFrame.jpg)
+
+![MicroFrame](https://github.com/neverlee/microframe/raw/master/docs/MicroFrame.png)
 
 ### 节点设计
 1. 每个微服务节点为一个MicroFrame框架服务实例（包括API、WEB、SRV、Worker、数据库代理、配置中心节点、日志收集节点）
