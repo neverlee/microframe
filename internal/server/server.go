@@ -31,7 +31,7 @@ type serverPlugin struct {
 	conf serverConf
 }
 
-func NewPlugin(mconf *config.SrvConf, pconf *config.RawYaml) (pluginer.SrvPluginer, error) {
+func NewPlugin(pconf *config.RawYaml) (pluginer.SrvPluginer, error) {
 	p := &serverPlugin{
 		SrvPluginBase: pluginer.SrvPluginBase{
 			Phase: pluginer.BasePhase,

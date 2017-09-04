@@ -19,7 +19,7 @@ import (
         print("\t\"github.com/neverlee/microframe/internal/{}\"".format(adir))
     print(")")
     print("")
-    print('var Plugins = map[string]func(*config.SrvConf, *config.RawYaml) (pluginer.SrvPluginer, error){')
+    print('var Plugins = map[string]func(*config.RawYaml) (pluginer.SrvPluginer, error){')
     for adir in dirs:
         print("\t\"{}\": {}.NewPlugin,".format(adir, adir))
     print("}")

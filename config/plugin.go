@@ -1,8 +1,11 @@
 package config
 
 import (
+	"io/ioutil"
 	"sync"
 	"time"
+
+	"gopkg.in/yaml.v2"
 )
 
 type Duration time.Duration
@@ -72,9 +75,24 @@ type PluginConfig struct {
 	Config RawYaml `yaml:"config"`
 }
 
-type boardConfig []*PluginConfig
+type BoardConf []*PluginConfig
 
-func (b *boardConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
+func NewBoardConf(confPath string) (BoardConf, error) {
+	var confBytes []byte
+	var conf BoardConf
+	var err error
+	if confBytes, err = ioutil.ReadFile(confPath); err != nil {
+		return nil, err
+	}
+
+	if err = yaml.Unmarshal(confBytes, &conf); err != nil {
+		return nil, err
+	}
+
+	return conf, nil
+}
+
+func (b *BoardConf) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	mutexki.Lock()
 	defer mutexki.Unlock()
 	pluginki = 0
@@ -82,7 +100,7 @@ func (b *boardConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	if err := unmarshal(&kimap); err != nil {
 		return err
 	}
-	*b = make(boardConfig, len(kimap))
+	*b = make(BoardConf, len(kimap))
 	for ki, raw := range kimap {
 		(*b)[ki.Index] = &PluginConfig{
 			Name:   ki.Key,

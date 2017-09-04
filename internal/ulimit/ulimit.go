@@ -19,7 +19,7 @@ type ulimitPlugin struct {
 	conf ulimitConf
 }
 
-func NewPlugin(mconf *config.SrvConf, pconf *config.RawYaml) (pluginer.SrvPluginer, error) {
+func NewPlugin(pconf *config.RawYaml) (pluginer.SrvPluginer, error) {
 	p := &ulimitPlugin{
 		SrvPluginBase: pluginer.SrvPluginBase{
 			Phase: pluginer.PreaccessPhase,

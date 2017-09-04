@@ -19,7 +19,7 @@ type transportPlugin struct {
 	conf transportConf
 }
 
-func NewPlugin(mconf *config.SrvConf, pconf *config.RawYaml) (pluginer.SrvPluginer, error) {
+func NewPlugin(pconf *config.RawYaml) (pluginer.SrvPluginer, error) {
 	p := &transportPlugin{
 		SrvPluginBase: pluginer.SrvPluginBase{
 			Phase: pluginer.BasePhase,

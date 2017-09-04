@@ -24,7 +24,7 @@ type registryPlugin struct {
 	conf registryConf
 }
 
-func NewPlugin(mconf *config.SrvConf, pconf *config.RawYaml) (pluginer.SrvPluginer, error) {
+func NewPlugin(pconf *config.RawYaml) (pluginer.SrvPluginer, error) {
 	p := &registryPlugin{
 		SrvPluginBase: pluginer.SrvPluginBase{
 			Phase: pluginer.BasePhase,

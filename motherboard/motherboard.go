@@ -13,7 +13,7 @@ import (
 	"github.com/neverlee/microframe/service"
 )
 
-type newPluginFunc func(*config.SrvConf, *config.RawYaml) (pluginer.SrvPluginer, error)
+type newPluginFunc func(*config.RawYaml) (pluginer.SrvPluginer, error)
 
 type pluginCard struct {
 	new   newPluginFunc
@@ -23,27 +23,24 @@ type pluginCard struct {
 }
 
 type motherBoard struct {
-	conf  *config.SrvConf
+	conf  config.BoardConf
 	cards []*pluginCard
 }
 
-func NewMotherBoard(conf *config.SrvConf, plupath string) (*motherBoard, error) {
+func NewMotherBoard(conf config.BoardConf, plupath string) (*motherBoard, error) {
 	board := &motherBoard{
 		conf:  conf,
-		cards: make([]*pluginCard, len(conf.Plugins)),
+		cards: make([]*pluginCard, len(conf)),
 	}
-	if plupath == "" {
-		plupath = conf.PluginPath
-	}
-	for i, pconf := range conf.Plugins {
+	for i, pconf := range conf {
 		sopath := filepath.Join(plupath, pconf.Name) + ".so"
 
-		xclog.Infoln("Load plugin libary:", sopath)
+		xclog.Infoln("Loading plugin:", pconf.Name)
 		solib, err := plugin.Open(sopath)
 		rnew := internal.Plugins[pconf.Name]
 		if err == nil {
 			if sby, serr := solib.Lookup("NewPlugin"); serr == nil {
-				rnew = sby.(func(*config.SrvConf, *config.RawYaml) (pluginer.SrvPluginer, error))
+				rnew = sby.(func(*config.RawYaml) (pluginer.SrvPluginer, error))
 			} else {
 				xclog.Fatalln("Bad plugin:", pconf.Name, serr)
 			}
@@ -73,7 +70,7 @@ func (mb *motherBoard) sort() {
 func (mb *motherBoard) PluginsNew() error {
 	for _, card := range mb.cards {
 		var err error
-		card.ctx, err = card.new(mb.conf, &card.conf.Config)
+		card.ctx, err = card.new(&card.conf.Config)
 		if err != nil {
 			xclog.Errorln("PluginNew error", card.conf.Name, err)
 			return err

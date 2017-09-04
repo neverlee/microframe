@@ -14,7 +14,7 @@ import (
 	"github.com/neverlee/microframe/internal/ulimit"
 )
 
-var Plugins = map[string]func(*config.SrvConf, *config.RawYaml) (pluginer.SrvPluginer, error){
+var Plugins = map[string]func(*config.RawYaml) (pluginer.SrvPluginer, error){
 	"selector":  selector.NewPlugin,
 	"server":    server.NewPlugin,
 	"transport": transport.NewPlugin,

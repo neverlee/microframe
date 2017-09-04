@@ -15,7 +15,7 @@ import (
 )
 
 func srvService(configPath, pluginPath string) {
-	conf, err := config.NewSrvConf(configPath)
+	conf, err := config.NewBoardConf(configPath)
 	if err != nil {
 		xclog.Fatalln(err)
 	}

@@ -25,7 +25,7 @@ type loggerPlugin struct {
 	conf loggerConf
 }
 
-func NewPlugin(mconf *config.SrvConf, pconf *config.RawYaml) (pluginer.SrvPluginer, error) {
+func NewPlugin(pconf *config.RawYaml) (pluginer.SrvPluginer, error) {
 	p := &loggerPlugin{
 		SrvPluginBase: pluginer.SrvPluginBase{
 			Phase: pluginer.LogPhase,

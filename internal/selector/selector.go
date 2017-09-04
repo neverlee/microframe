@@ -22,7 +22,7 @@ type selectorPlugin struct {
 	conf selectorConf
 }
 
-func NewPlugin(mconf *config.SrvConf, pconf *config.RawYaml) (pluginer.SrvPluginer, error) {
+func NewPlugin(pconf *config.RawYaml) (pluginer.SrvPluginer, error) {
 	p := &selectorPlugin{
 		SrvPluginBase: pluginer.SrvPluginBase{
 			Phase: pluginer.BasePhase,
