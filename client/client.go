@@ -1,4 +1,4 @@
-package mclient
+package client
 
 import (
 	"github.com/micro/go-micro/broker"
@@ -13,7 +13,7 @@ import (
 	"github.com/neverlee/microframe/config"
 )
 
-type MClientOpts struct {
+type ClientOpts struct {
 	RequestTimeout  config.Duration `yaml:"request_timeout" json:"request_timeout"` // Default: 5s
 	Retries         int             `yaml:"retries" json:"retries"`                 // Default: 1
 	PoolSize        int             `yaml:"pool_size" json:"pool_size"`             // Default: 0
@@ -26,10 +26,10 @@ type MClientOpts struct {
 	// TransportAddress []string `yaml:"address"` // default
 }
 
-var DefaultClient *MClient
+var DefaultClient *Client
 
-type MClient struct {
-	opts      *MClientOpts
+type Client struct {
+	opts      *ClientOpts
 	broker    broker.Broker
 	registry  registry.Registry
 	selector  selector.Selector
@@ -38,8 +38,8 @@ type MClient struct {
 	client.Client
 }
 
-func NewClient(opts *MClientOpts) *MClient {
-	cli := MClient{
+func NewClient(opts *ClientOpts) *Client {
+	cli := Client{
 		opts:      opts,
 		broker:    broker.DefaultBroker,
 		registry:  registry.DefaultRegistry,
