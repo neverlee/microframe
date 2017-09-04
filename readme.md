@@ -10,7 +10,6 @@ MicroFrame是基于[go-micro](https://github.com/micro/go-micro)结合go的plugi
 5. 所有节点可以通过配置，直接使用以上这些公共服务
 
 ## 微服务架构设计
-![MicroFrame](https://github.com/neverlee/microframe/raw/master/docs/MicroFrame.jpg)
 
 ![MicroFrame](https://github.com/neverlee/microframe/raw/master/docs/MicroFrame.png)
 
