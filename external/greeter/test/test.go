@@ -9,7 +9,7 @@ import (
 	"github.com/neverlee/microframe/config"
 	"github.com/neverlee/microframe/client"
 
-	hello "greeter/proto"
+	hello "github.com/neverlee/microframe/external/greeter/proto"
 )
 
 func main() {

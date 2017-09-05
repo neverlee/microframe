@@ -1,9 +1,9 @@
-all: greeter.so test/client
+all: greeter.so test/test
 
 greeter.so: greeter.go
 	go build --buildmode=plugin
 
-test/client: test/client.go
+test/test: test/test.go
 	cd test && go build
 
 # .PHONY: proto
@@ -13,4 +13,4 @@ test/client: test/client.go
 .PHONY: clean
 clean:
 	-rm -f greeter.so
-	-rm -f test/client
+	-rm -f test/test

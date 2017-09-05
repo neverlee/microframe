@@ -2,12 +2,13 @@ package main
 
 import (
 	"github.com/neverlee/xclog/go"
-	hello "greeter/proto"
 	"golang.org/x/net/context"
 
 	"github.com/neverlee/microframe/config"
 	"github.com/neverlee/microframe/pluginer"
 	"github.com/neverlee/microframe/service"
+
+	hello "github.com/neverlee/microframe/external/greeter/proto"
 )
 
 // 配置结构体
