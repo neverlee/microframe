@@ -12,9 +12,8 @@ all: frame
 # 	mkdir -p plugins/
 # 	go build --buildmode=plugin -o $@ $<
 
-# plugin: exts/
-# 	mkdir -p plugins
-# 	make -C exts/
+plugin: external/
+	make -C external/
 
 frame: */*.go *.go ./internal/internal.go
 	go build
@@ -22,10 +21,15 @@ frame: */*.go *.go ./internal/internal.go
 ./internal/internal.go: ./internal
 	cd internal && python3 mkinternal.py | tee internal.go
 
+.PHONY: install
+install:
+	mkdir -p plugins
+	cp external/*/*.so plugins/
+
 # test:
 # 	./microframe srv -c ./conf/config.yml
 
 .PHONY: clean
 clean:
-# 	-rm -f plugins/*.so
+	-rm -f plugins/*.so
 	-rm -f microframe
