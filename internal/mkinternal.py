@@ -4,9 +4,7 @@ import os
 import sys
 
 if __name__ == '__main__':
-    exclude = {"cookie115"}
-    exclude = {}
-    dirs = [adir for adir in os.listdir("./") if os.path.isdir(adir) and (adir not in exclude)]
+    dirs = [adir for adir in os.listdir("./") if os.path.isdir(adir)]
 
     header = """package internal
 
